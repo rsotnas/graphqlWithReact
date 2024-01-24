@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
+import { Link } from "react-router";
 
 const query = gql`
   {
@@ -10,35 +11,6 @@ const query = gql`
     }
   }
 `;
-
-// const SongsList = (props) => {
-//   // console.log(props);
-
-//   const [songs, setSongs] = useState([]);
-//   const [loading, setLoading] = useState(true);
-
-//   const renderSongs = () => {
-//     return songs.map((song) => {
-//       return <li key={song.title}>{song.title}</li>;
-//     });
-//   };
-
-//   useEffect(() => {
-//     // if (props?.data?.songs) {
-//     //   setSongs(props.data.songs);
-//     //   setLoading(false);
-//     // }
-//     if (!props.data.loading) {
-//       setSongs(props.data.songs);
-//       setLoading(false);
-//     }
-//   }, [props.data.loading]);
-
-//   // return when props.data.loading is false
-//   if (!loading) {
-//     return <div>{renderSongs()}</div>;
-//   }
-// };
 
 class SongsList extends Component {
   renderSongs() {
@@ -57,7 +29,14 @@ class SongsList extends Component {
       return <div>Loading...</div>;
     }
 
-    return <ul className="collection">{this.renderSongs()}</ul>;
+    return (
+      <div>
+        <ul className="collection">{this.renderSongs()}</ul>
+        <Link to="/songs/new" className="btn-floating btn-large red right">
+          <i className="material-icons">add</i>
+        </Link>
+      </div>
+    );
   }
 }
 
